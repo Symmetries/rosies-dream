@@ -1,0 +1,18 @@
+body {
+  margin-top: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-bottom: 3em;
+}
+body, button {
+  font-family: 'Old Standard TT', serif;
+  font-size: 1.4em;
+}
+
+button {
+  margin: 1em;
+}
+
+.katex{
+  font-size: 1em !important;
+}
