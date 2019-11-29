@@ -98,8 +98,8 @@ let questions = [
       r`the \( S_n \)-conjugacy classes of a permutation \( \sigma \) in \( A_n \) does not split into two \( A_n \) classes`,
       r`there exists an odd permutation which commutes to \( \sigma \).`
     ),
-    r`Show that the following conditions are equivalent:`,
-    createList("a",
+    r`Show that the following conditions are equivalent:`
+    + createList("a",
       r`The \( S_n \)-class decomposition of \( \sigma \) is a product of cycles of pairwise distinct odd lengths `
       + `(where, for example, a pair of fixed points is considered to be a product of two cycles of length 1).`
     ),

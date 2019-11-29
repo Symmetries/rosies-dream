@@ -4,41 +4,19 @@ html,body {
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
 }
-@media (max-width: 480px) {
-  html {
-    font-size: 19px;
-  }
-}
 
-@media (min-width: 480px) {
-  html {
-    font-size: 18px;
-  }
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 17px;
-  }
-}
-
-@media (min-width: 992px) {
-  html {
-    font-size: 18px;
-  }
-}
-
-@media (min-width: 1200px) {
-  html {
-    font-size: 19px;
-  }
+html {
+  font-size: 35px;
 }
 
 body {
-  margin-top: 2em;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-bottom: 2em;
+  margin: 1.5em;
+}
+
+ol {
+  margin-top: 0;
+  margin-left: 1em;
+  margin-right: 0;
 }
 
 body,button {
