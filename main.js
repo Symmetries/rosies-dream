@@ -37,9 +37,6 @@ function createList(type, ...strings) {
   return template;
 }
 
-// Add KaTeX.js rendering to the whole document
-document.addEventListener("DOMContentLoaded", () => renderMath());
-
 let questions = [
   r`Describe all the subgroups of \( \Z \).`,
   r`Let \( G \) be a group and \( S \subseteq G \) be a nonempty subset.` + "\n"
@@ -114,6 +111,13 @@ let questions = [
   + r`Show that \( S' \) is a semigroup. Show that \( S''' = S' \).`,
   r`Draw a Cayley graph of \( A_4 \) in which one can see the Klein group \( V \lhd S_4 \) and its 3 cosets.`, // end of assignment 4
 ]
+
+// Add KaTeX.js rendering to the whole document
+document.addEventListener("DOMContentLoaded", () => {
+  renderMath()
+  // show page once KaTeX finishes loading
+  setTimeout(() => document.getElementsByTagName("html")[0].style.visibility = "visible", 30); 
+});
 
 window.onload = () => {
   let questionP = document.querySelector("#question-p");
