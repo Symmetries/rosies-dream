@@ -1,3 +1,9 @@
+html,body {
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+}
 @media (max-width: 480px) {
   html {
     font-size: 16px;
@@ -40,8 +46,12 @@ body,button {
 }
 
 button {
+  font-weight: bold;
   font-size: 1em;
   margin: 1em;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
 .katex{
