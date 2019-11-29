@@ -41,7 +41,6 @@ function pick(questions, completion, element) {
 
     completion[choice] = true;
 
-
     element.innerHTML = "<b> Problem. </b>" + questions[choice];
     renderMath();
   }
@@ -174,7 +173,7 @@ let questions = [
   ),
   r`Work out \( \operatorname{Sylow}(35) \).`,
   createList(1,
-    r`Show that very maximal subgroup of a finite abelian group is of prime index.`,
+    r`Show that every maximal subgroup of a finite abelian group is of prime index.`,
     r`Show the same thing for finite nilpotent groups.`
   ),
   r`Let \( G \) be a simple group of order 168. How many elements of order \( 7 \) are there in \( G \)?` // end of assignment 7
