@@ -1,8 +1,7 @@
-let r = String.raw; // raw string tag for convenient LateX/KaTeX
+const r = String.raw; // raw string tag for convenient LateX/KaTeX
 
 function renderMath() {
   renderMathInElement(document.body, {
-    // ...options...
     delimiters: 
     [
       {left: r`\[`, right: r`\]`, display: true},
@@ -32,23 +31,37 @@ function updateCompletion(completion, element) {
 function pick(questions, completion, element) {
   let choice = -1;
 
-  if (completion.every(e => e)) {
-    element.innerHTML = "<b> Congrats. </b> You have finished all problems!"
-  } else {
+  if (!completion.every(e => e)) {
     while (choice < 0 || completion[choice]) {
       choice = Math.floor(Math.random() * questions.length);
     }
-
-    completion[choice] = true;
-
-    element.innerHTML = "<b> Problem. </b>" + questions[choice];
-    renderMath();
   }
+  window.localStorage.setItem("currentQuestion", choice);
+
+  return choice;
+}
+
+function setComplete(completion, currentQuestion) {
+  completion[currentQuestion] = true;
+  window.localStorage.setItem("completion", JSON.stringify(completion));
+}
+
+function setQuestion(questions, choice, element) {
+  if (choice < 0) { 
+    element.innerHTML = "<b> Congrats. </b> You have finished all problems!"
+  } else { 
+    element.innerHTML = "<b> Problem. </b>" + questions[choice];
+  }
+  renderMath();
 }
 
 function showAll(questions, element) {
   element.innerHTML = "<b> Problem. </b>" + questions.reduce((acc, cur) => acc + "</br></br></br></br></br> <b> Problem. </b>" + cur);
   renderMath();
+}
+
+function nextQuestion() {
+
 }
 
 function createList(type, ...strings) {
@@ -120,7 +133,7 @@ let questions = [
     + createList("a",
       r`the \( S_n \)-class of a permutation \( \sigma \) in \( A_n \) splits into two \( A_n \)-classes`,
       r`the cycle decomposition of \( \sigma \) is a product of cycles of pairwise distinct odd lengths`
-      ),
+    ),
   ), // end of assignment 3
   r`Let \( G \) be a group of even order. Show from first principles that \( G \) contains an element of order 2.`,
   r`Let \( G \) be a group. `
@@ -179,7 +192,16 @@ let questions = [
   r`Let \( G \) be a simple group of order 168. How many elements of order \( 7 \) are there in \( G \)?` // end of assignment 7
 ]
 
-let completion = questions.map(_ => false);
+let completion;
+let currentQuestion = -1;
+let showingAll = false;
+
+if (window.localStorage.getItem("currentQuestion")) {
+  completion = JSON.parse(window.localStorage.getItem("completion"));
+  currentQuestion = JSON.parse(window.localStorage.getItem("currentQuestion"));
+} else {
+  completion = questions.map(_ => false);
+}
 
 // Add KaTeX.js rendering to the whole document
 document.addEventListener("DOMContentLoaded", () => {
@@ -196,18 +218,37 @@ window.onload = () => {
   let resetButton = document.querySelector("#reset-button");
 
   updateCompletion(completion, completionP);
-  pick(questions, completion, questionP);
+  if (currentQuestion < 0) {
+    currentQuestion = pick(questions, completion, questionP);
+    window.localStorage.setItem("currentQuestion", currentQuestion);
+    window.localStorage.setItem("completion", JSON.stringify(completion));
+  }
+
+  setQuestion(questions, currentQuestion, questionP);
 
   nextButton.onclick = () => {
+    setComplete(completion, currentQuestion);
     updateCompletion(completion, completionP);
-    pick(questions, completion, questionP);
+    currentQuestion = pick(questions, completion, questionP);
+    setQuestion(questions, currentQuestion, questionP);
   };
 
-  showAllButton.onclick = () => showAll(questions, questionP);
+  showAllButton.onclick = () => {
+    showingAll = !showingAll;
+    if (showingAll) {
+      showAll(questions, questionP)
+    } else {
+      setQuestion(questions, currentQuestion, questionP);
+    }
+    showAllButton.innerHTML = showingAll ? "Hide" : "Show All";
+  };
 
   resetButton.onclick = () => {
     completion = questions.map(_ => false)
     updateCompletion(completion, completionP);
-    pick(questions, completion, questionP);
+    currentQuestion = pick(questions, completion, questionP);
+    setQuestion(questions, currentQuestion, questionP);
+    window.localStorage.setItem("currentQuestion", currentQuestion);
+    window.localStorage.setItem("completion", JSON.stringify(completion));
   };
 }
