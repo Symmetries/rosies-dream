@@ -31,17 +31,25 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
                   integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
                   crossorigin="anonymous"></script>
+    <script src="questions.js"></script>
     <script src="main.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <h1> \( \R \)osie's \(\mathbb D\)ream </h1>
-    <p id="question-p"></p>
+    <h1 id="title"></h1>
+    <div id="topics-div">
+      <button class="right-margin"> <b> Algebra </b> </button>
+      <button class="right-margin"> <b> Analysis (Problems)</b> </button>
+      <button class="right-marign"> <b> Analysis (Theorems)</b> </button>
+      <button> <b> Probability </b> </button>
+    </div>
+    <p id="question-p"> </p>
     <div>
-      <span id="completion-p">  </span>
-      <button id="next-button"> Next Question </button>
-      <button id="show-all-button"> Show All </button>
+      <button class="right-margin" id="next-button"> Next Question </button>
+      <button class="right-margin" id="show-all-button"> Show All </button>
       <button id="reset-button"> Reset </button>
+      </br>
+      <span id="completion-p" class="right-margin">  </span>
     </div>
   </body>
 </html>
