@@ -5,27 +5,55 @@ function renderMath() {
       {left: r`\[`, right: r`\]`, display: true},
       {left: r`\(`, right: r`\)`, display: false},
     ],
-    macros: {
-      "\\N": r`\mathbb N`,
-      "\\Z": r`\mathbb Z`,
-      "\\R": r`\mathbb R`,
-      "\\Q": r`\mathbb Q`,
-      "\\E": r`\mathbb E`,
-      "\\Aut": r`\operatorname{Aut}`,
-      "\\Inn": r`\operatorname{Inn}`,
-      "\\Sym": r`\operatorname{Sym}`,
-      "\\inv": r`^{-1}`,
-      "\\surject": r`\twoheadrightarrow`,
-      "\\inject": r`\hookrightarrow`,
-      "\\isom": r`\cong`,
-      "\\ep": r`\varepsilon`,
-      "\\subset": r`\subseteq`,
-      "\\set": r`\{ #1 \}`,
-      "\\abs": r`\left \lvert #1 \right \rvert`,
-      "\\given": r`\; | \;`,
-      "\\of": r`\circ`,
-    }
+    macros: macros
   });
+}
+
+function parseTitle(title) {
+  return title.split("")
+    .map(c => c == c.toLowerCase() ? c : r`\( \mathbb ${c}\)`)
+    .join("").replace("'", "’");
+}
+
+function parseText(text) {
+  let lines = text.split('\n').filter(l => l.indexOf('%') != 0).join('\n');
+
+  let questions = lines.split("\\end{problem}").filter(l => l.length > 1);
+  questions = questions.map(q => q.replace("\\begin{problem}", ""));
+
+  // from: \begin{enumerate}[1] s1 \item s2 \item s3 \item s4 \end{enumerate}
+  // to: createList(1, [s1, s2, s3, s4])
+
+  questions = questions.map(question => {
+    let result = "";
+    let s = []; // stack
+    let currentIndex = 0;
+    let done = false;
+
+    while(!done) {
+      currentIndex = question.indexOf("\\begin{enumerate}")
+      if (currentIndex < 0) {
+        done = true;
+        result += question;
+      } else {
+        result += question.substring(0, currentIndex);
+        currentIndex += "\\begin{enumerate}".length;
+        let type = question.charAt(currentIndex + 1);
+        closingIndex = question.indexOf("\\end{enumerate}");
+        let subquestions = question.substring(currentIndex, closingIndex);
+        subquestions = subquestions.split("\\item").filter(s => s.length > 1).slice(1);
+        question = question.substring(closingIndex + "\\end{enumerate}".length);
+        result += createList(type, ...subquestions);
+      }
+    }
+    return result;
+  });
+
+  return questions;
+}
+
+function createList(type, ...strings) {
+  return `<ol type=${type}>${strings.map(s => `<li>${s}</li>`).reduce((a, c) => a + c)}</ol>`;
 }
 
 function updateCompletion(completion, element) {
@@ -64,27 +92,12 @@ function showAll(questions, element) {
   renderMath();
 }
 
-const titles = [
-  r`\( \R \text{osie's} \) \( \mathbb{D}\text{ream} \)`,
-  r`\( \R \text{osie's} \) \( \mathbb{N}\text{ightmare} \)`,
-  r`\( \R \text{osie's} \) \( \mathbb{N}\text{ightmare} \)`,
-  r`\( \R \text{osie's} \) \( \mathbb{H}\text{ell} \)`,
-];
 
 let completion;
 let currentQuestion;
 let course; // 0: Algebra, 1: Analysis, 2: Probability
 let showingAll = false;
 
-if (window.localStorage.getItem("dream-course")) {
-  completion = JSON.parse(window.localStorage.getItem("dream-completion"));
-  currentQuestion = JSON.parse(window.localStorage.getItem("dream-currentQuestion"));
-  course = window.localStorage.getItem("dream-course");
-} else {
-  completion = questions.map(q => q.map(_ => false));
-  currentQuestion = titles.map(_ => -1);
-  course = 0;
-}
 
 // Add KaTeX.js rendering to the whole document
 document.addEventListener("DOMContentLoaded", () => {
@@ -93,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => document.getElementsByTagName("html")[0].style.visibility = "visible", 200); 
 });
 
-window.onload = () => {
+window.onload = async() => {
   let questionP = document.querySelector("#question-p");
   let completionP = document.querySelector("#completion-p");
   let nextButton = document.querySelector("#next-button");
@@ -102,17 +115,6 @@ window.onload = () => {
   let topicsDiv = document.querySelector("#topics-div");
   let title = document.querySelector("#title");
 
-  title.innerHTML = titles[course];
-
-  updateCompletion(completion[course], completionP);
-  if (currentQuestion[course] < 0) {
-    currentQuestion[course] = pick(questions[course], completion[course], questionP);
-    window.localStorage.setItem("dream-currentQuestion", JSON.stringify(currentQuestion));
-    window.localStorage.setItem("dream-completion", JSON.stringify(completion));
-    window.localStorage.setItem("dream-course", course);
-  }
-
-  setQuestion(questions[course], currentQuestion[course], questionP);
 
   nextButton.onclick = () => {
     setComplete(completion[course], currentQuestion[course]);
@@ -145,12 +147,30 @@ window.onload = () => {
     window.localStorage.setItem("dream-course", course);
   };
 
+  let questions = [];
+  let response = await fetch("/topics.json");
+  let courses = await response.json();
+  let titles = [];
+  for (let i = 0; i < courses.length; i++) {
+    titles.push(courses[i].nickname);
+    let element = document.createElement('button');
+    element.textContent = courses[i].name;
+    if (i < courses.length - 1) {
+      element.className = "right-margin";
+    }
+    topicsDiv.appendChild(element);
+
+    response = await fetch(`/questions/${courses[i].filename}`);
+    questionsText = await response.text();
+    questions.push(parseText(questionsText));
+  };
+
   Array.from(topicsDiv.children).forEach((b, i) => {
     b.onclick = () => {
       showingAll = false;
       showAllButton.innerHTML = showingAll ? "Hide" : "Show All";
       nextButton.style.display = showingAll ? "none" : "inline";
-      title.innerHTML = titles[i];
+      title.innerHTML = parseTitle(titles[i]);
       course = i;
       if (currentQuestion[course] < 0) {
         currentQuestion[course] = pick(questions[course], completion[course], questionP);
@@ -164,4 +184,26 @@ window.onload = () => {
       window.localStorage.setItem("dream-course", course);
     };
   });
+
+  if (window.localStorage.getItem("dream-course")) {
+    completion = JSON.parse(window.localStorage.getItem("dream-completion"));
+    currentQuestion = JSON.parse(window.localStorage.getItem("dream-currentQuestion"));
+    course = window.localStorage.getItem("dream-course");
+  } else {
+    completion = questions.map(q => q.map(_ => false));
+    currentQuestion = titles.map(_ => -1);
+    course = 0;
+  }
+
+  title.textContent = parseTitle(titles[course]);
+
+  updateCompletion(completion[course], completionP);
+  if (currentQuestion[course] < 0) {
+    currentQuestion[course] = pick(questions[course], completion[course], questionP);
+    window.localStorage.setItem("dream-currentQuestion", JSON.stringify(currentQuestion));
+    window.localStorage.setItem("dream-completion", JSON.stringify(completion));
+    window.localStorage.setItem("dream-course", course);
+  }
+
+  setQuestion(questions[course], currentQuestion[course], questionP);
 }

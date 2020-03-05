@@ -1,10 +1,10 @@
-const r = String.raw; // raw string tag for convenient LateX/KaTeX
+let r = String.raw; // raw string tag for convenient LateX/KaTeX
 
 function createList(type, ...strings) {
   return `<ol type=${type}>${strings.map(s => `<li>${s}</li>`).reduce((a, c) => a + c)}</ol>`;
 }
 
-const questions = [
+let questions = [
 [
   r`Describe all the subgroups of \( \Z \).`,
   r`Let \( G \) be a group and \( S \subseteq G \) be a nonempty subset.` + "\n"

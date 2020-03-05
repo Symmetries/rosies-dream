@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Algebra 4",
+    "nickname": "Rosie's Dream",
+    "filename": "algebra4.tex"
+  },
+  {
+    "name": "Analysis 4",
+    "nickname": "Rosies's Nightmare",
+    "filename": "analysis4.tex"
+  },
+  {
+    "name": "Advanced Calculus",
+    "nickname": "Rosie's Hell",
+    "filename": "advancedCalculus.tex"
+  }
+]
