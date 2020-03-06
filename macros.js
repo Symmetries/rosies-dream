@@ -6,6 +6,7 @@ const macros = {
   "\\R": r`\mathbb R`,
   "\\Q": r`\mathbb Q`,
   "\\E": r`\mathbb E`,
+  "\\F": r`\mathbb F`,
   "\\Aut": r`\operatorname{Aut}`,
   "\\Inn": r`\operatorname{Inn}`,
   "\\Sym": r`\operatorname{Sym}`,

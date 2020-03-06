@@ -1,4 +1,5 @@
 % this is a test
+% assignment 1
 \begin{problem}
 Let \( * \) be a binary law on \( (\Z, +) \) such that \( (\Z, +, *) \) is a unital ring.
 Show that \( (\Z, +, *) \) is isomorphic to the ring of integers.
@@ -31,4 +32,133 @@ is a subring of \( \mathbb H \).
 \begin{problem}
 Let \( K \) be a field.
 Characterize the units in the ring \( K[[X]] \) of formal power series.
+\end{problem}
+
+% assignment 2
+\begin{problem}
+Assume \( R \) is commutative. Let \( x \) be an indeterminate, let \( f(x) \) be a monic polynomial in \( R[x] \) of degree \( n \geq 1 \) and use the bar notation to denote passage to the quotient ring \( R[x] / (f(x)) \).
+\begin{enumerate}[a]
+\item
+Show that every element of \( R[x] / (f(x)) \) is of the form  \( \overline{p(x)} \) for some polynomial \( p(x) \in R[x] \) of degree less than \( n \), i.e.
+\[ R[x] / (f(x)) = \{ \overline{a_0} +  \overline{a_1x} + \dots +  \overline{a_{n-1}x^{n-1}} | a_0, a_1, \dots a_{n-1} \in R \}. \]
+[If \(f(x) = x^n + b_{n-1}x^{n-1} + \dots + b_0\) then \(\overline{x^n} = \overline{-(b_{n-1}x^{n-1} + \dots + b_0)}\). Use this to reduce powers of \( \overline{x} \) in the quotient ring.]
+\item
+Prove that if \( p(x) \) and \( q(x) \) are distinct polynomials in \( R[x] \) which are both of degree less than \( n \), then \( \overline{p(x)} \neq \overline{q(x)} \). [Otherwise \( p(x) - q(x) \) is an \( R[x] \)-multiple of the monic polynomial \( f(x) \).]
+\item
+If \( f(x) = a(x)b(x) \) where both \( a(x) \) and \( b(x) \) have degree less than \( n \), prove that \( \overline{a(x)} \) is a zero divisor in \( R[x] / (f(x)) \).
+\item
+If \( f(x) = x^n - a \) for some nilpotent element \( a \in R \), prove that \( \overline{x} \) is nilpotent in \( R[x] / (f(x)) \).
+\item
+Let \( p \) be a prime, assume \( R = \F_p \) and \( f(x) = x^p - a \) for some \( a \in \F_p \). Prove that \( \overline{x-a} \) is nilpotent in \( R[x] / (f(x)) \).
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Let \( R \) be a unital commutative ring. Show that \( R \setminus R^\times \) is an ideal if and only if \( R \) contains a unique maximal ideal.
+\end{problem}
+
+\begin{problem}
+Provide examples (and supporting proofs) of (using commutative unital rings)
+\begin{enumerate}[1]
+\item
+a nonzero prime ideal which is not maximal.
+\item
+a ring without nonzero nilpotent elements which is not an integral domain.
+\item
+an integral domain in which the intersection of maximal ideals is trivial.
+\item
+an integral domain in which the intersection of maximal ideals is non-trivial.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Let \(R\) be a unital commutative ring.
+\begin{enumerate}[1]
+\item
+Show that if \( r \in R \) is nilpotent, then \( 1 - r \) is invertible.
+\item
+Show that if \( r \in R \) is nilpotent, then \( 1 + (r) \subset R^\times \).
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Let \( p \) be a rational (i.e. usual) prime. Prove that if \( p \) is not a Gaussian prime, then it is the product of a Gaussian prime and its conjugate.
+\end{problem}
+
+% assignment 3
+\begin{problem}
+Let \( I \) be an ideal in a unital commutative ring \( R \).
+\begin{enumerate}[1]
+\item
+Show that \( \sqrt{I} \) is the inverse image of the nilradical of \( R/I \).
+\item
+Show that \( \sqrt{I} \) is the intersection of prime ideals containing  \( I \).
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+In the ring \( \Q[X, Y] \), do the elements \( X \) and \( Y \) have a gcd? Is the ideal \( (X, Y) \) principal?
+\end{problem}
+
+\begin{problem}
+Let \( R \) be a commutative unital ring. An ideal \( I \) in \( R \) is said to be irreducible if it cannot be expressed as the intersection of two strictly larger ideals:
+\[ I = J \cap K \implies I = J \text{ or } I = K \]
+\begin{enumerate}[1]
+\item
+Check that if \( I \) is a prime ideal, it is irreducible.
+\item
+Check that if \( p \) prime and \( n \geq 1 \), then \( (p^n) \) is irreducible.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+\begin{enumerate}[1]
+\item
+Prove that \( \Z[\sqrt{2}] = \{a + b \sqrt{2} , a, b \in \Z \} \) is Euclidean.
+\item
+Prove that  \( \Z[\sqrt{2}] \) contains infinitely many units, of the form  \( \pm(1 + \sqrt{2})^n \).
+\end{enumerate}
+\end{problem}
+
+% assignment 4
+\begin{problem}
+Let \( M \) be a module which admits a countable generating set. Show that the following are equivalent:
+\begin{enumerate}[1]
+\item
+\( M \) is f.g.
+\item
+Every chain \( (M_n) \) of submodules (chain = nested sequence) of \( M \) such that \( M = \cup_n M_n \) stabilizes.
+\item
+For every surjective homomorphism \( F_A \twoheadrightarrow M \), where \( F_A \) is the free module on the countable set \( A \), there exists a finite subset \( B \subset A \) such that the restriction \( F_B \twoheadrightarrow M \) is surjective.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+\begin{enumerate}[1]
+\item
+Show that a simple module over \( \Z \) is finite.
+\item
+Show that a simple module over \( K[x] \) (where \( K \) is a field) is finite dimensional.
+(Solve this exercise in one stroke).
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Let \( R \) be a Noetherian domain (i.e. an integral domain which is Noetherian). Prove that every \( r \in R \) can be decomposed as a product \( r = up_1 \dots p_n \) where the \( p_i\)'s are irreducible and \( u \) is a unit.
+\end{problem}
+
+\begin{problem}
+Let \( \theta : M \to M \) be an \( R \)-module map. Suppose that \( M \) is Noetherian.
+\begin{enumerate}[1]
+\item
+Show that \( \ker \theta^n = \ker \theta^{n+1} \) for all large integer \( n \).
+\item
+Show that \( \ker \theta^n \cap \mathrm{Im} \theta^n = 0 \) for some large integer \( n \).
+\item
+Show that if \( \theta \) is surjective, then it is injective.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Let \( R \) be an integral domain and \( M \) be a f.g. \( R \)-module. We define the rank of \( M \) to be the largest integer \( n \) such that \( M \) contains a free module \( F \isom R^n \). In class we showed that (if \( R \) is an integral domain and \( M \) is a f.g. \( R \)-module) there exists a free submodule \( F \subset M \) such that \( M/F \) is a torsion module. Show that \( \mathrm{rank}(F) =  \mathrm{rank}(M) \).
 \end{problem}
