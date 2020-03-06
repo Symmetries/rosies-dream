@@ -2,6 +2,7 @@
 
 One night, during one of Rosie's epsilon sleep, she dreamt of a way she could practice for math exams by randomly selecting problems.
 Low and behold, her dream came true!
+So true in fact, that it can be accessed [here](https://diegolopez.me/rosies-dream/).
 
 ## Tech "Stack"
 
