@@ -1,3 +1,5 @@
+let root = window.location.hostname == "diegolopez.me" ? "/rosies-dream/" : "/";
+
 function renderMath() {
   renderMathInElement(document.body, {
     delimiters: 
@@ -148,7 +150,7 @@ window.onload = async() => {
   };
 
   let questions = [];
-  let response = await fetch("/topics.json");
+  let response = await fetch(root + "topics.json");
   let courses = await response.json();
   let titles = [];
   for (let i = 0; i < courses.length; i++) {
@@ -160,7 +162,7 @@ window.onload = async() => {
     }
     topicsDiv.appendChild(element);
 
-    response = await fetch(`/questions/${courses[i].filename}`);
+    response = await fetch(root + `questions/${courses[i].filename}`);
     questionsText = await response.text();
     questions.push(parseText(questionsText));
   };
