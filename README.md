@@ -63,7 +63,38 @@ Prove that "color" is the correct spelling.
 \end{problem}
 ```
 
-Importantly, no LaTeX commands work aside from `\begin{problem}`, `\end{problem}`, `\begin{enumerate}[<type>]`, `\item`, and `\end{enumerate}`.
+If you want to add macros, you can edit the `macros.js` file which looks like this
+
+```
+const r = String.raw; // raw string tag for convenient LateX/KaTeX
+
+const macros = {
+  "\\N": r`\mathbb N`,
+  "\\Z": r`\mathbb Z`,
+  "\\R": r`\mathbb R`,
+  "\\Q": r`\mathbb Q`,
+  "\\E": r`\mathbb E`,
+  "\\F": r`\mathbb F`,
+  "\\Aut": r`\operatorname{Aut}`,
+  "\\Inn": r`\operatorname{Inn}`,
+  "\\Sym": r`\operatorname{Sym}`,
+  "\\inv": r`^{-1}`,
+  "\\surject": r`\twoheadrightarrow`,
+  "\\inject": r`\hookrightarrow`,
+  "\\isom": r`\cong`,
+  "\\ep": r`\varepsilon`,
+  "\\subset": r`\subseteq`,
+  "\\set": r`\left \{ #1 \right \}`,
+  "\\abs": r`\left \lvert #1 \right \rvert`,
+  "\\given": r`\; | \;`,
+  "\\of": r`\circ`,
+  "\\ideal": r`\triangleleft`
+};
+```
+
+and simply add a new entry for each additional macro.
+
+Importantly, outside of math mode, no LaTeX commands work aside from `\begin{problem}`, `\end{problem}`, `\begin{enumerate}[<type>]`, `\item`, and `\end{enumerate}`.
 These are merely there to make it easier to paste from existing `.tex` assignment files. Each question is expected to be surrounded by `\begin{problem}` and `\end{problem}`.
 For multiple part questions, there is the `\begin{enumerate}[<type>] ... \end{enumerate}` "environment".
 It expects a single argument, either "1" or "a", depending on how you want to label the question.
@@ -102,6 +133,7 @@ python3 -m http.server 8080
 ```
 
 and heading to `localhost:8080` in your browser.
+
 ## Issues
 
 If you already used this site before and it does not work anymore, erase all site data.
