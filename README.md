@@ -12,8 +12,7 @@ It does not include package management and only supports math mode.
 A list of supported functions can be found [here](https://katex.org/docs/supported.html).
 
 **Note.** I strongly prefer using `\( ... \)` and `\[ ... \]` to enter inline math mode and display math mode rather than `$ ... $` and `$$ ... $$`, respectively.
-That is why at the moment the site only supports `\( ... \)` and `\[ ... \]`.
-If you want to use `$ ... $` and `$$ ... $$` you can make a pull request.
+However, you can use either one to enter math mode.
 
 ## Repo Organization
 
