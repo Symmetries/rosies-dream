@@ -93,6 +93,15 @@ If you wish to add a new course, you need to add an entry to the `topics.json` f
 
 Then add a new `.tex` file in the `questions/` folder.
 
+Please preview your changes before doing a pull request.
+You can preview by doing
+
+```
+cd rosies-dream
+python3 -m http.server 8080
+```
+
+and heading to `localhost:8080` in your browser.
 ## Issues
 
 If you already used this site before and it does not work anymore, erase all site data.
