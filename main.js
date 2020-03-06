@@ -5,7 +5,9 @@ function renderMath() {
     delimiters: 
     [
       {left: r`\[`, right: r`\]`, display: true},
+      {left: "$$", right: "$$", display: true},
       {left: r`\(`, right: r`\)`, display: false},
+      {left: "$", right: "$", display: false},
     ],
     macros: macros
   });
