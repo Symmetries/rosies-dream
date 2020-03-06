@@ -1,7 +1,108 @@
-% test
+% Homework 3 Problems 
 \begin{problem}
 	Let \( \{ (X_n, \rho_n) \}_{n=1}^\infty \) be a countable collection of metric spaces. Use Problem 6 to show that \( \rho_* \) defines a metric on the Cartesian product \( \prod_{n=1}^\infty \), where for points \( x=\{x_n \} \) and \( y= \{ y_n \} \) in \( \prod_{n=1}^\infty X_n \), 
 	\[
 		\rho_* (x,y) := \sum_{i=1}^\infty \frac{1}{2^n} \cdot \frac{\rho_n(x_n, y_n)}{1+\rho_n(x_n, y_n)}
+	\]
+\end{problem}
+
+\begin{problem}
+	\begin{enumerate}[a]
+		\item Show that a continuous mapping between metric spaces remains continuous if an equivalent metric is imposed on the domain and an equivalent metric is imposed on the range. 
+		\item For a non-empty subset \( E \) of a metric space \( (X, \rho) \) and a point \( x \in X \), define the distance from \( x \)to \( E \), dist\( (x,E) \) as follows: 
+		\[
+			\text{dist}(x,E) := \inf \{ \rho(x,y)\ |\ y \in E \} 
+		\]
+		\item Show that the distance function \( f: X \rightarrow \R \) defined by \( f(x):= $ dist$(x,E) \), for \( x \in X \), is continuous. 
+		\item Show that \( \{ x \in X\ |\ \text{dist}(x, E) = 0 \} = \overline{E} \). 
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	For a mapping \( f \) of the metric space \( (X, \rho) \) to the metric space \( (Y, \sigma) \), show that \( f \) is uniformly continuous \( \iff\)  for all sequences \( \{ u_n \} \) and \( \{ v_n \} \) in \( X \), 
+	\[
+		\text{ if } \lim_{n \rightarrow \infty} \rho(u_n, v_n) = 0 \text{ then } \lim_{n \rightarrow \infty} \sigma( f(u_n), f(v_n)) = 0 
+	\]
+\end{problem}
+
+\begin{problem}
+	Use the outline below to prove the following extension property for uniformly continuous mappings: let \(X \) and \( Y \) be metric spaces, with \( Y \) complete, and \( f \) a uniformly continuous mapping from a subset \( E \) of \( X \) to \( Y \). Then, \( f \) has a uniquely uniformly continuous extension mapping $\overline{f}$ of $\overline{E}$ to $Y$. 
+	\begin{enumerate}[a]
+		\item Show that \( f \) maps Cauchy sequences in \( E \) to Cauchy sequences in \( Y \). 
+		\item For \( x \in \overline{E} \), choose a sequence \( \{ x_n \} \) in \( E \) that converges to \( x \) and define \( \overline{f}(x) \) to the the limit of \( \{ f(x_n) \} \). Use Problem 44 (Sequential definition of uniform continuity) to show that \( \overline{f}(x) \) is properly defined. 
+		\item Show that \( \overline{f} \) is uniformly continuous on \( \overline{E} \). 
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	Consider the countable collection of metric spaces \( \{ (X_n, \rho_n ) \}_{n=1}^\infty \). For the Cartesian product of these sets \( Z := \prod_{n=1}^\infty X_n \), define \( \sigma \) on \( Z\times Z \) by setting, for \( x = \{ x_n \} \), \( y = \{ y_n \} \), 
+	\[
+		\sigma(x,y) := \sum_{n=1}^\infty \frac{1}{2^n} \rho^*_n(x_n, y_n) \text{ where each } \rho^*_n := \rho_n / (1+\rho_n) 
+	\]
+	\begin{enumerate}[a]
+		\item Show that \( \sigma \) is a metric. 
+		\item Show that \( Z, \sigma) \)  is complete \( \iff \) each \( (X_n, \rho_n) \) is complete. 
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	Let \( E \) be a subset of the compact metric space \( X \). Show that the metric subspace \( E \) is compact if and only if \( E \) is a closed subset of \( X \). 
+\end{problem}
+
+\begin{problem}
+	For a subset \( E \) of a complete metric space \( X \), show that \( E \) is totally bounded if and only if its closure \( \overline{E} \) is totally bounded. 
+\end{problem}
+
+\begin{problem}
+	Let \( B = \{ \{ x_n \} \in \ell^2\ |\ \sum_{n=1}^\infty x_n^2 \leq 1 \} \) be the closed unit ball in \( \ell^2 \). Show that \( B \) fails to be a compact by: 
+	\begin{enumerate}[a]
+		\item Showing \( B \) is not sequentially compact, 
+		\item Finding an open cover of \( B \) without any finite subcover, and 
+		\item Showing \( B \) is not totally bounded. 
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	Let \(E\) be a subset of a topological space \( X \). 
+	\begin{enumerate}[a]
+		\item A point \( x \in X \) is called an interior point of \( E \) provided there is a neighbourhood of \( x \) that is contained in \( E \). THe collection of interior points of \( E \) is called the interior of \( E \) and is denoted by int(\( E \) ) . Show that int( \( E \)) is always open and \( E \) is open if and only if \( E = \) int(\(E\)). 
+		\item A point \( x \in X \) is called an exterior point of \( E \) provided there is a neighbourhood of \( x \) that is contained in \( X \setminus E \): the collection of exterior points of \( E \) is called the exterior of  \( E \) and is denoted ext\((E)\). Show that ext\( (E) \) is always open and \( E \) is closed \( \iff \) \( \overline{E} \setminus E \subseteq \) ext\( (E) \). 
+		\item A point \( x \in X \) is called a boundary point of \( E \) provided every neighbourhood of \( x \) contains points of \( E \) and points of \( X \setminus E \) : the collection of boundary points of \( E \) is called the boundary of \( E \) and is denoted by \( \partial(E)\). Show that: 
+		\begin{enumerate}[a]
+			\item \( \partial(E) \) is always closed. 
+			\item \( E \) is open \( \iff \) \( E \cap \partial(E) = \emptyset \). 
+			\item \( E \) is closed \( \iff \) \( \partial(E) \subseteq E \). 
+		\end{enumerate}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	Let \( X \) be a topological space. Show that \( X \) is Hausdorff \( \iff \) the diagonal \( D := \{ (x_1, x_2) \in X \times X\ |\ x_1 = x_2 \} \) is closed as a subset of \( X \times X \). 
+\end{problem}
+
+\begin{problem}
+	Show that the Moore Plane is separable (see Problem 10). Show that the subspace $\( \mathbb{R} \times \{ 0 \} \) of the Moore plane is not separable. Conclude that the Moore Plane is not metrisable and not second countable. 
+\end{problem}
+
+\begin{problem}
+	For topological spaces \( X \) and \( Y \), let \( f \) be a continuous mapping from \( X \) onto \( Y \). If \( X \) is Hausdorff, is \( Y \) Hausdorff? If \( X \) is normal, is \( Y \) is normal?  
+\end{problem}
+
+\begin{problem}
+	Let \( \rho_1 \) and \( \rho_2 \) be metrics on the set \( X \) that induce topologies \( \mathcal{O}_1 \) and \( \mathcal{O}_2 \) , respectively. If \( \mathcal{O}_1 = \mathcal{O}_2 \), are the metrics necessarily equivalent? 
+\end{problem}
+
+\begin{problem}
+	Let \( (X, \mathcal{O}) \) be a topological space. 
+	\begin{enumerate}[a]
+		\item Prove that if \( (X, \mathcal{O}) \) is compact, then \( (X, \mathcal{O}_1) \) is compact for any topology \( \mathcal{O}_1 \) weaker than \( \mathcal{O} \). 
+		\item Show that if \( (X, \mathcal{O}) \) is Hausdorff, then \( (X, \mathcal{O}_2) \) is Hausdorff for any topology \( \mathcal{O} \)  stronger than \( \mathcal{O} \). 
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	Show that the following subset of the plane is connected but not arcwise connected. 
+	\[ 
+		X := \{ (x,y)\ |\ x = 0,\ -1 \leq y \leq 1 \} \cup \{ (x,y)\ |\ y = \sin (1/x),\ 0 < x \leq 1 \} 
 	\]
 \end{problem}
